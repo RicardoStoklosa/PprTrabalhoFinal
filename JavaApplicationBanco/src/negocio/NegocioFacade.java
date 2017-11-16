@@ -10,12 +10,12 @@ public class NegocioFacade {
 
 	private NegocioFacade(){ }
 
-	public static Boolean login(String login, String senha) {
-		return null;
+	public static boolean login(String login, String senha) {
+		return true;
 	}
 
-	public static Boolean loginBanco(String login, String senha) {
-		return null;
+	public static boolean loginBanco(String login, String senha) {
+		return true;
 	}
 
 	public static void deposito(double valor_deposito, Usuario usuario) {
@@ -26,27 +26,25 @@ public class NegocioFacade {
 
 	}
 
-	public static Boolean solicitarEmprestimo(Double valor_emprestimo, Usuario usuario) {
-		return null;
+	public static boolean solicitarEmprestimo(Double valor_emprestimo, Usuario usuario) {
+		return true;
 	}
 
 	public static void realizarEmprestimo(double valor_emprestimo, Usuario usuario) {
 
 	}
 
-	public static Void excluirCliente(Usuario usr) {
-		return null;
+	public static void excluirCliente(Usuario usr) {
 	}
 
-	public static Void modificarCliente(Usuario usr) {
-		return null;
+	public static void modificarCliente(Usuario usr) {
 	}
 
 	/**
 	 *  
 	 */
-	public static Boolean cadastrarCliente(Usuario usr) {
-		return null;
+	public static boolean cadastrarCliente(Usuario usr) {
+		return true;
 	}
 
 	public static boolean verificaDispSaldo(float Valor, Usuario usr) {
