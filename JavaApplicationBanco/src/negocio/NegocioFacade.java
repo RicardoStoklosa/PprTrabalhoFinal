@@ -70,5 +70,4 @@ public class NegocioFacade {
 	public static ArrayList<Emprestimo> getEmprestimos(Usuario cpf) {
 		return null;
 	}
-
 }
