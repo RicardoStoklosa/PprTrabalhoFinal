@@ -1,17 +1,18 @@
 package EDA;
 
-public class Usuario extends Pessoa {
+public class Usuario extends Pessoa{
 
 	private String login;
-
 	private String senha;
+    
+    public String getLogin() {
+        return login;
+    }
 
-	private Conta conta;
-
-	private Sacar sacar;
-
-	private Depositar depositar;
-
-	private Emprestimo emprestimo;
+    
+    public String getSenha() {
+        return senha;
+    }
 
 }
+

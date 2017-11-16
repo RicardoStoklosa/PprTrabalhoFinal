@@ -1,17 +1,14 @@
 package negocio;
 
-import DAO.DAOFacade;
-import EDA.Usuario;
+import DAO.*;
+import EDA.*;
 import java.util.ArrayList;
-import EDA.Administrador;
 
-public class Negocio Facade {
+public class NegocioFacade {
 
-	static DAOFacade registros;
+	static final DAOFacade registros = (DAOFacade) DAOMemoria.get();
 
-	private static void NegocioFacade() {
-
-	}
+	private NegocioFacade(){ }
 
 	public static Boolean login(String login, String senha) {
 		return null;

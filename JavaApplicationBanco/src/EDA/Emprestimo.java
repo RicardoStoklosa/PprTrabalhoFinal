@@ -4,8 +4,6 @@ public class Emprestimo {
 
 	private double saldo;
 
-	private Conta conta;
-
 	private Usuario usuario;
 
 	public Boolean solicitarEmprestimo(LocalDate tempo, Double valor) {

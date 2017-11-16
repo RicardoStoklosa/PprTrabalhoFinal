@@ -9,5 +9,14 @@ public class Administrador {
 	private Gerenciar gerenciar;
 
 	private Conta conta;
+    
+    public String getLogin() {
+        return login;
+    }
 
+    
+    public String getSenha() {
+        return senha;
+    }
+ 
 }
