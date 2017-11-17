@@ -1,14 +1,13 @@
 package EDA;
 
-public class Administrador {
-
+public class Administrador{
 	private String login;
-
 	private String senha;
-
 	private Gerenciar gerenciar;
-
-	private Conta conta;
+        public Administrador(String l, String s) {
+            this.login = login;
+            this.senha = senha;
+        }
     
     public String getLogin() {
         return login;

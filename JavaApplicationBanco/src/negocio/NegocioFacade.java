@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class NegocioFacade {
 
-	static final DAOFacade registros = (DAOFacade) DAOMemoria.get();
+	static final DAOFacade registros = DAOMemoria.get();
 
 	private NegocioFacade(){ }
 
@@ -40,9 +40,6 @@ public class NegocioFacade {
 	public static void modificarCliente(Usuario usr) {
 	}
 
-	/**
-	 *  
-	 */
 	public static boolean cadastrarCliente(Usuario usr) {
 		return true;
 	}
