@@ -1,4 +1,4 @@
-package Apresentação;
+package Apresentacao;
 
 public class MenuGerenciar {
 

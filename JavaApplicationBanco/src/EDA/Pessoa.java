@@ -7,18 +7,16 @@ public class Pessoa {
 
 	private String nome;
 
-	private int cpf;
+	private String cpf;
 
-	private int cnpj;
-
-	private Date dataNasc;
+	private int anoNasc;
 
 	private String endereco;
         
-        public Pessoa( String n, int c, Date data, String end){
+        public Pessoa( String n, String c, int data, String end){
             nome = n;
             cpf = c;
-            dataNasc = data;
+            anoNasc = data;
             endereco = end;
         }
 

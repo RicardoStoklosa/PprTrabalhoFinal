@@ -5,8 +5,8 @@ public class Administrador{
 	private String senha;
 	private Gerenciar gerenciar;
         public Administrador(String l, String s) {
-            this.login = login;
-            this.senha = senha;
+            this.login = l;
+            this.senha = s;
         }
     
     public String getLogin() {

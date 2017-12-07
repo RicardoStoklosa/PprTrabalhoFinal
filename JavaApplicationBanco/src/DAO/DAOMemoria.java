@@ -8,6 +8,7 @@ public class DAOMemoria implements DAOFacade{
         private static DAOMemoria memoria;
     
         private Administrador gerente;
+        private Usuario usuario;
 	private ArrayList<Usuario> usuarios = new ArrayList();
 	private ArrayList<Administrador> gerentes = new ArrayList();
         private ArrayList<Sacar> saques = new ArrayList();
@@ -25,12 +26,14 @@ public class DAOMemoria implements DAOFacade{
 	}
         
         private void init(){
-            gerente = new Administrador("adm","123");
+            gerente = new Administrador("udesc", "785b10a64d56af61e802913738e7d567");
+            usuario = new Usuario("Ricardo", "10129245672", 1998,"joinville", "ricardo", "202cb962ac59075b964b07152d234b70");
         }
 
       
         @Override
 	public Administrador login(String login, String senha) {
+            
             if( gerente.getLogin().compareTo(login)==0  &&  gerente.getSenha().compareTo(senha)==0 )
                 return gerente;
             return null;
@@ -38,7 +41,9 @@ public class DAOMemoria implements DAOFacade{
 
         @Override
 	public Usuario loginBanco(String login, String senha) {
-		return null;
+		if( usuario.getLogin().compareTo(login)==0  &&  usuario.getSenha().compareTo(senha)==0 )
+                    return usuario;
+                return null;
 	}
 
         @Override
