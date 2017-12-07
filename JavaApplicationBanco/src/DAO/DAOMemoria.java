@@ -1,3 +1,4 @@
+//nosso
 package DAO;
 
 import java.util.ArrayList;
@@ -6,6 +7,7 @@ import EDA.*;
 public class DAOMemoria implements DAOFacade{
         private static DAOMemoria memoria;
     
+        private Administrador gerente;
 	private ArrayList<Usuario> usuarios = new ArrayList();
 	private ArrayList<Administrador> gerentes = new ArrayList();
         private ArrayList<Sacar> saques = new ArrayList();
@@ -23,12 +25,15 @@ public class DAOMemoria implements DAOFacade{
 	}
         
         private void init(){
+            gerente = new Administrador("adm","123");
         }
 
       
         @Override
 	public Administrador login(String login, String senha) {
-		return null;
+            if( gerente.getLogin().compareTo(login)==0  &&  gerente.getSenha().compareTo(senha)==0 )
+                return gerente;
+            return null;
 	}
 
         @Override
