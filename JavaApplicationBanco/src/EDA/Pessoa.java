@@ -19,5 +19,21 @@ public class Pessoa {
             anoNasc = data;
             endereco = end;
         }
+        public String getNome(){
+            return nome;
+        }
+        
+        public String getCpf(){
+            return cpf;
+        }
+        
+        public int getNasc(){
+            return anoNasc;
+        }
+        
+        public String getEndereco(){
+            return endereco;
+        }
+        
 
 }

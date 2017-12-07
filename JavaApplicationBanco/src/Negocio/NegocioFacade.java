@@ -3,6 +3,7 @@ package Negocio;
 import DAO.*;
 import EDA.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NegocioFacade {
 
@@ -44,8 +45,22 @@ public class NegocioFacade {
 	public static void modificarCliente(Usuario usr) {
 	}
 
-	public static boolean cadastrarCliente(Usuario usr) {
-		return true;
+	public static Operacao cadastrarCliente(Usuario usuario) {
+            Operacao status = new Operacao( );
+            if( usuario.getNome().length() <= 3 )
+                status.anexarErro("O nome é muito curto");
+            if( usuario.getEndereco().length() <= 3 )
+                status.anexarErro("O endereço é muito curto");
+            if( usuario.getCpf().length() <= 11 )
+                status.anexarErro("O Cpf não é valido");
+            if( usuario.getNasc()>=Calendar.YEAR || usuario.getNasc()<=Calendar.YEAR-150)
+                status.anexarErro("Data de nacimento invalida");
+            if( status.getStatus() ){
+                boolean res = registros.cadastrarCliente(usuario);
+            if( res == false )
+                status.anexarErro("Erro ao registrar dados do usuário!");
+            }
+            return status;
 	}
 
 	public static boolean verificaDispSaldo(float Valor, Usuario usr) {

@@ -51,6 +51,7 @@ public class DAOMemoria implements DAOFacade{
             for( Usuario us : usuarios ){
             if( us.getCpf()== usr.getCpf())
                 return false;
+       
             }
             return usuarios.add( usuario );
 	}
