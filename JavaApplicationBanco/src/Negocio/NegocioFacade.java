@@ -47,14 +47,15 @@ public class NegocioFacade {
 
 	public static Operacao cadastrarCliente(Usuario usuario) {
             Operacao status = new Operacao( );
+            //Calendar cal = Calendar.getInstance();
             if( usuario.getNome().length() <= 3 )
                 status.anexarErro("O nome é muito curto");
             if( usuario.getEndereco().length() <= 3 )
                 status.anexarErro("O endereço é muito curto");
-            if( usuario.getCpf().length() <= 11 )
+            if( usuario.getCpf().length() < 11 )
                 status.anexarErro("O Cpf não é valido");
-            if( usuario.getNasc()>=Calendar.YEAR || usuario.getNasc()<=Calendar.YEAR-150)
-                status.anexarErro("Data de nacimento invalida");
+            //if( usuario.getNasc()>=cal.get(Calendar.YEAR));
+            //    status.anexarErro("Data de nacimento invalida");
             if( status.getStatus() ){
                 boolean res = registros.cadastrarCliente(usuario);
             if( res == false )

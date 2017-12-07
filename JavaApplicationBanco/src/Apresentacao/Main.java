@@ -10,11 +10,12 @@ public class Main {
     public static Usuario user;
     public static MenuAdm menuAdm;
     public static MenuCaixa menuCaixa;
+    public static Login tela;
     
     private Main(){}
     
     public static void main(String args[]){
-        Login tela = new Login();
+        tela = new Login();
         tela.setVisible( true );
     }
 }
