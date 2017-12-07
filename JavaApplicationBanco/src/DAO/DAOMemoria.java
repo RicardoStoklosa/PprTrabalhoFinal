@@ -30,8 +30,8 @@ public class DAOMemoria implements DAOFacade{
             usuario = new Usuario("Ricardo", "10129245672", 1998,"joinville", "ricardo", "202cb962ac59075b964b07152d234b70");
         }
 
-      
-        @Override
+
+    @Override
 	public Administrador login(String login, String senha) {
             
             if( gerente.getLogin().compareTo(login)==0  &&  gerente.getSenha().compareTo(senha)==0 )
@@ -48,15 +48,15 @@ public class DAOMemoria implements DAOFacade{
 
         @Override
 	public boolean cadastrarCliente(Usuario usr) {
-                return true;
+            for( Usuario us : usuarios ){
+            if( us.getCpf()== usr.getCpf())
+                return false;
+            }
+            return usuarios.add( usuario );
 	}
 
-    /**
-     *
-     * @param valor_deposito
-     * @param usuario
-     */
-    @Override
+    
+        @Override
 	public void deposito(double valor_deposito, Usuario usuario) {
                 
 	}
