@@ -39,10 +39,20 @@ public class NegocioFacade {
 
 	}
 
-	public static void excluirCliente(Usuario usr) {
+	public static Operacao excluirCliente(Usuario usr) {
+            Operacao status = new Operacao();
+            boolean res = registros.excluirCliente(usr);
+            if(!res)
+                status.anexarErro("Erro ao deletar cliente");
+            return status;
 	}
 
-	public static void modificarCliente(Usuario usr) {
+	public static Operacao modificarCliente(Usuario usr) {
+            Operacao status = new Operacao();
+            boolean res = registros.modificarCliente(usr);
+            if(!res)
+                status.anexarErro("Erro ao alterar cliente");
+            return status;
 	}
 
 	public static Operacao cadastrarCliente(Usuario usuario) {
@@ -68,9 +78,12 @@ public class NegocioFacade {
 		return false;
 	}
 
-	public static ArrayList<Usuario> getContas(Administrador login) {
-		return null;
+	public static ArrayList<Usuario> getContas() {
+		return registros.getContas();
 	}
+        public static Usuario getConta(String cod){
+            return registros.getConta(cod);
+        }
 
 	public static ArrayList<Administrador> getGerente(Administrador login) {
 		return null;

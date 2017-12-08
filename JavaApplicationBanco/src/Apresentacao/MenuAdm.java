@@ -28,13 +28,21 @@ public class MenuAdm extends javax.swing.JFrame {
     private void initComponents() {
 
         jAdicionarCliente = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jAdicionarCliente.setText("jButton1");
+        jAdicionarCliente.setText("Adicionar Cliente");
         jAdicionarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAdicionarClienteActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Modificar Cliente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -43,16 +51,20 @@ public class MenuAdm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(jAdicionarCliente)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jAdicionarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(52, 52, 52)
                 .addComponent(jAdicionarCliente)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jButton1)
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         pack();
@@ -63,6 +75,12 @@ public class MenuAdm extends javax.swing.JFrame {
         cadas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jAdicionarClienteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MenuAlterar mod = new MenuAlterar();
+        mod.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -101,5 +119,6 @@ public class MenuAdm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAdicionarCliente;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,20 +15,42 @@ import javax.swing.JOptionPane;
  *
  * @author ricardo
  */
-public class MenuCadastrar extends javax.swing.JFrame {
-
+public class MenuAlterar extends javax.swing.JFrame {
+    
+    boolean modo_alteracao = false;
     /**
      * Creates new form MenuCadastrar
      */
-    public MenuCadastrar() {
+    public MenuAlterar() {
         initComponents();
+        ativarModoConsulta();
+    }
+    
+    private void ativarModoConsulta(){
+        cpf.setEnabled(true);
+        nome.setEnabled(false);
+        endereco.setEnabled(false);
+        nasc.setEnabled(false);
+        jToggleButton1.setText("Consultar");
+        jDelete.setEnabled(false);
+        modo_alteracao = false;
+    }
+    
+    private void ativarModoAlteracao(){
+        cpf.setEnabled(false);
+        nome.setEnabled(true);
+        endereco.setEnabled(true);
+        nasc.setEnabled(true);
+        jToggleButton1.setText("Alterar");
+        jDelete.setEnabled(true);
+        modo_alteracao = true;
+        
     }
     
     private void limparTela(){
         nome.setText("");
         cpf.setText("");
         endereco.setText("");
-        senha.setText("");
         nasc.setText("");
     }
 
@@ -49,9 +71,8 @@ public class MenuCadastrar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
-        senha = new javax.swing.JPasswordField();
+        jDelete = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -67,12 +88,17 @@ public class MenuCadastrar extends javax.swing.JFrame {
 
         jLabel4.setText("Endereço:");
 
-        jLabel5.setText("Senha:");
-
         jToggleButton1.setText("Adicionar");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        jDelete.setText("Deletar");
+        jDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDeleteActionPerformed(evt);
             }
         });
 
@@ -105,31 +131,31 @@ public class MenuCadastrar extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nome)
                             .addComponent(cpf)
                             .addComponent(nasc)
-                            .addComponent(endereco)
-                            .addComponent(senha)))
+                            .addComponent(endereco)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
+                        .addGap(59, 59, 59)
+                        .addComponent(jDelete)
+                        .addGap(76, 76, 76)
                         .addComponent(jToggleButton1)))
                 .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,53 +164,93 @@ public class MenuCadastrar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jToggleButton1)
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        String name = nome.getText();
-        String end = endereco.getText();
-        char password[] = senha.getPassword();
-        String pass = encrypt(String.valueOf( password ));
-        int nas = Integer.parseInt( nasc.getText() );
-        int cp;
-        /*try{
-            cp = Integer.parseInt( cpf.getText() );
-        } catch(NumberFormatException exc){
-            JOptionPane.showMessageDialog(this, "O cpf não é um valor numérico", "ERRO", JOptionPane.ERROR_MESSAGE);
-            return;
-        }*/
-        Usuario usuario = new Usuario(name, cpf.getText(), nas, end,cpf.getText(),pass);
-        Operacao op = NegocioFacade.cadastrarCliente(usuario);
+        if( modo_alteracao == false ){ // esta no modo de consulta de código
+            consultaReg();
+        }
+        else{ // está no modo de alteração
+            alterarRegistro();
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void consultaReg(){
+        String cod = cpf.getText();
+        Usuario usuario = NegocioFacade.getConta(cod);
+        if( usuario == null ){ // Se não encontrou o livro mostra uma mensagem de erro
+            JOptionPane.showMessageDialog(this, "Não foi encontrado este usuario!", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+        else{ // Se encontrou o livro então:
+            // bloqueia o campo de código e abilita os demais
+            ativarModoAlteracao();
+            
+            // preenche os valores existentes nos campos
+            nome.setText( usuario.getNome());
+            nasc.setText( Integer.toString(usuario.getNasc()) );
+            endereco.setText(usuario.getEndereco());
+            
+            // altera o texto do botão de consultar para alterar
+            ativarModoAlteracao();
+        }
+        
+    }
+    private void alterarRegistro(){
+        String cod = cpf.getText();
+        Usuario usuario = NegocioFacade.getConta(cod);
+        Usuario usr = new Usuario(nome.getText(),cod,Integer.parseInt(nasc.getText()),endereco.getText(),cod,usuario.getSenha());
+        Operacao op = NegocioFacade.modificarCliente(usr);
         if( !op.getStatus() ){
-            JOptionPane.showMessageDialog(this, "Não foi possível adicionar o cliente: \n"+op.getErro(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Não foi possível alterar o Cliente: \n"+op.getErro(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         else{
-            int opcao = JOptionPane.showConfirmDialog(this, "Cliente adicionado com sucesso.\n"
-                                              + "Deseja adicionar outro cliente?", "Operação OK", JOptionPane.YES_NO_OPTION);
+            int opcao = JOptionPane.showConfirmDialog(this, "Dados alterados com sucesso.\n"
+                                              + "Deseja alterar outro Cliente?", "Operação OK", JOptionPane.YES_NO_OPTION);
             if( opcao == JOptionPane.OK_OPTION ){
                 limparTela();
+                ativarModoConsulta();
             }
             else{
                 this.dispose();
             }
         }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
-
+    }
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         Main.tela = new Login();
         Main.tela.setVisible( true );
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
+        String cod = cpf.getText();
+        Usuario usr = NegocioFacade.getConta(cod);
+        Operacao op = NegocioFacade.excluirCliente(usr);
+        if( !op.getStatus() ){
+            JOptionPane.showMessageDialog(this, "Não foi possível excluir o Cliente: \n"+op.getErro(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            int opcao = JOptionPane.showConfirmDialog(this, "Cliente excluido com sucesso.\n"
+                                              + "Deseja alterar outro Cliente?", "Operação OK", JOptionPane.YES_NO_OPTION);
+            if( opcao == JOptionPane.OK_OPTION ){
+                limparTela();
+                ativarModoConsulta();
+            }
+            else{
+                this.dispose();
+            }
+        }
+    }//GEN-LAST:event_jDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,20 +269,21 @@ public class MenuCadastrar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuCadastrar().setVisible(true);
+                new MenuAlterar().setVisible(true);
             }
         });
     }
@@ -224,11 +291,11 @@ public class MenuCadastrar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpf;
     private javax.swing.JTextField endereco;
+    private javax.swing.JButton jDelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -236,6 +303,5 @@ public class MenuCadastrar extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField nasc;
     private javax.swing.JTextField nome;
-    private javax.swing.JPasswordField senha;
     // End of variables declaration//GEN-END:variables
 }

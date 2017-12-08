@@ -58,9 +58,8 @@ public class DAOMemoria implements DAOFacade{
             for( Usuario us : usuarios ){
             if( us.getCpf()== usr.getCpf())
                 return false;
-       
             }
-            return usuarios.add( usuario );
+            return usuarios.add( usr );
 	}
 
     
@@ -75,7 +74,15 @@ public class DAOMemoria implements DAOFacade{
 	}
 
         @Override
-	public void modificarCliente(Usuario usr) {
+	public boolean modificarCliente(Usuario usr) {
+            for(Usuario aux : usuarios){
+                if(aux.getCpf().compareTo(usr.getCpf())==0){
+                    usuarios.remove(aux);
+                    usuarios.add(usr);
+                    return true;
+                }
+            }
+            return false;
 	}
 
         @Override
@@ -84,7 +91,14 @@ public class DAOMemoria implements DAOFacade{
 	}
 
         @Override
-	public void excluirCliente(Usuario usr) {
+	public boolean excluirCliente(Usuario usr) {
+            for(Usuario aux : usuarios){
+                if(aux.getCpf().compareTo(usr.getCpf())==0){
+                    usuarios.remove(aux);
+                    return true;
+                }
+            }
+            return false;
 	}
         
         @Override
@@ -98,10 +112,17 @@ public class DAOMemoria implements DAOFacade{
 	}
         
         @Override
-        public ArrayList<Usuario> getContas(Administrador login) {
+        public ArrayList<Usuario> getContas() {
 		return usuarios;
 	}
-
+        public Usuario getConta(String cod){
+            for(Usuario aux : usuarios){
+                if(aux.getCpf().compareTo(cod)==0){
+                    return aux;
+                }
+            }
+            return null;
+        }
         @Override
 	public ArrayList<Administrador> getGerente(Administrador login) {
 		return gerentes;
