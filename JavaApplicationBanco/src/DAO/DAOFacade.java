@@ -7,7 +7,7 @@ public interface DAOFacade {
 
 	public Administrador login(String login, String senha);
 	public Usuario loginBanco(String login, String senha);
-	public void deposito(double valor_deposito, Usuario usuario);
+	public boolean deposito(Depositar deposito);
 	public void saque(Double valor_saque, Usuario usuario);
 	public boolean solicitarEmprestimo(Double valor_emprestimo, Usuario usuario);
 	public void realizarEmprestimo(double valor_emprestimo, Usuario usuario);
@@ -20,7 +20,7 @@ public interface DAOFacade {
         public Usuario getConta(String cod);
 	public ArrayList<Administrador> getGerente(Administrador login);
 	public ArrayList<Sacar> getSaques(Usuario cpf);
-	public ArrayList<Depositar> getDepositos(Usuario cpf);
+	public ArrayList<Depositar> getDepositos();
 	public ArrayList<Emprestimo> getEmprestimos(Usuario cpf);
 
 }

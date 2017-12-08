@@ -2,6 +2,7 @@ package Negocio;
 
 import DAO.*;
 import EDA.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -23,8 +24,21 @@ public class NegocioFacade {
                 return usr;
 	}
 
-	public static void deposito(double valor_deposito, Usuario usuario) {
-
+	public static Operacao deposito(BigDecimal valor_deposito, Usuario usuario) {
+            Operacao status = new Operacao();
+            BigDecimal zero = new BigDecimal("0.00");
+            if(valor_deposito.compareTo(zero)<=0){
+                status.anexarErro("Valor Invalido!");
+            }
+            if(!status.getStatus())
+                return status;
+            else{
+                Depositar depos = new Depositar(usuario,valor_deposito);
+                boolean retorno = registros.deposito(depos);
+                if(!retorno)
+                    status.anexarErro("Erro em depositar");
+            }
+            return status;
 	}
 
 	public static void saque(Double valor_saque, Usuario usuario) {
@@ -93,8 +107,14 @@ public class NegocioFacade {
 		return null;
 	}
 
-	public static ArrayList<Depositar> getDepositos(Usuario cpf) {
-		return null;
+	public static ArrayList<Depositar> getDepositos(Usuario usuario) {
+		ArrayList<Depositar> depositos = new ArrayList();
+                for(Depositar aux : registros.getDepositos()){
+                    if(aux.getUsuario()==usuario)
+                        depositos.add(aux);
+                }
+                return depositos;
+                
 	}
 
 	public static ArrayList<Emprestimo> getEmprestimos(Usuario cpf) {

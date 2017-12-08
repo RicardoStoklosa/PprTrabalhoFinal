@@ -29,6 +29,7 @@ public class DAOMemoria implements DAOFacade{
             gerente = new Administrador("udesc", "785b10a64d56af61e802913738e7d567");
             usuarios.add(new Usuario("Ricardo", "10129245672", 1998,"joinville", "ricardo", "202cb962ac59075b964b07152d234b70"));
             usuarios.add(new Usuario("Ricasdfsfrdo", "10139245672", 1998,"joinville", "ric", "202cb962ac59075b964b07152d234b70"));
+            
         }
 
 
@@ -64,8 +65,9 @@ public class DAOMemoria implements DAOFacade{
 
     
         @Override
-	public void deposito(double valor_deposito, Usuario usuario) {
+	public boolean deposito(Depositar depos) {
                 
+                return depositos.add(depos);
 	}
 
         @Override
@@ -134,7 +136,7 @@ public class DAOMemoria implements DAOFacade{
 	}
 
         @Override
-	public ArrayList<Depositar> getDepositos(Usuario cpf) {
+	public ArrayList<Depositar> getDepositos() {
 		return depositos;
 	}
 

@@ -1,15 +1,25 @@
 package EDA;
 
+import java.math.BigDecimal;
+
 public class Conta{
 
-	private double saldo;
+	private final BigDecimal saldo;
 
-        public Conta(double sald){
-            saldo =sald;
+        private final Usuario usuario;
+       
+        public Conta(BigDecimal s, Usuario usr){
+            saldo = s;
+            usuario = usr;
         }
-	public double getSaldo(){
+        
+        public BigDecimal getSaldo(){
             return saldo;
         }
+        
+        
+       
+        
         
                 
 

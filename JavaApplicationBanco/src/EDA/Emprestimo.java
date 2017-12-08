@@ -1,5 +1,7 @@
 package EDA;
 
+import java.time.LocalDate;
+
 public class Emprestimo {
 
 	private double saldo;
