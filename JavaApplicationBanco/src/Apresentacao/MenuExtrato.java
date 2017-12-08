@@ -5,6 +5,11 @@
  */
 package Apresentacao;
 
+import EDA.*;
+import Negocio.NegocioFacade;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author stokl
@@ -16,6 +21,31 @@ public class MenuExtrato extends javax.swing.JFrame {
      */
     public MenuExtrato() {
         initComponents();
+        
+        
+        ArrayList<Sacar> saques= NegocioFacade.getSaques(Main.user);
+        ArrayList<Depositar> depositos= NegocioFacade.getDepositos(Main.user);
+        ArrayList<Emprestimo> emprestimos= NegocioFacade.getEmprestimos(Main.user);
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        
+        for( Sacar aux : saques ){
+            Object linha[] = { aux.getData(), "+ "+aux.getValorSaque()};
+            
+            modelo.addRow( linha );;
+        }
+        for( Emprestimo aux : emprestimos ){
+            Object linha[] = { aux.getData(), "+ "+aux.getValorEmprestimo()};
+            
+            modelo.addRow( linha );
+        }
+        for( Depositar aux : depositos ){
+            Object linha[] = { aux.getData(), "- "+aux.getValorDeposito()};
+            
+            modelo.addRow( linha );
+        }
+        
+        Conta cont = NegocioFacade.getConta(Main.user.getCpf());
+        jLabel1.setText(" = R$"+cont.getSaldo());
     }
 
     /**
@@ -29,15 +59,16 @@ public class MenuExtrato extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Valor", "data"
+                "data", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -50,20 +81,28 @@ public class MenuExtrato extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("jLabel1");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 25, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -105,6 +144,7 @@ public class MenuExtrato extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

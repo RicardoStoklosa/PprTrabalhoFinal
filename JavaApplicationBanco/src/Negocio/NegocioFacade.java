@@ -109,7 +109,10 @@ public class NegocioFacade {
 	public static ArrayList<Usuario> getContas() {
 		return registros.getContas();
 	}
-        public static Usuario getConta(String cod){
+        public static Usuario getUsuario(String cod){
+            return registros.getUsuario(cod);
+        }
+        public static Conta getConta(String cod){
             return registros.getConta(cod);
         }
 

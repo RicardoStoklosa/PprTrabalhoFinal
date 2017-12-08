@@ -197,7 +197,7 @@ public class MenuAlterar extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
     private void consultaReg(){
         String cod = cpf.getText();
-        Usuario usuario = NegocioFacade.getConta(cod);
+        Usuario usuario = NegocioFacade.getUsuario(cod);
         if( usuario == null ){ // Se não encontrou o livro mostra uma mensagem de erro
             JOptionPane.showMessageDialog(this, "Não foi encontrado este usuario!", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -218,7 +218,7 @@ public class MenuAlterar extends javax.swing.JFrame {
     }
     private void alterarRegistro(){
         String cod = cpf.getText();
-        Usuario usuario = NegocioFacade.getConta(cod);
+        Usuario usuario = NegocioFacade.getUsuario(cod);
         Usuario usr = new Usuario(nome.getText(),cod,Integer.parseInt(nasc.getText()),endereco.getText(),cod,usuario.getSenha(),jCheckBox1.isSelected());
         Operacao op = NegocioFacade.modificarCliente(usr);
         if( !op.getStatus() ){
@@ -244,7 +244,7 @@ public class MenuAlterar extends javax.swing.JFrame {
 
     private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
         String cod = cpf.getText();
-        Usuario usr = NegocioFacade.getConta(cod);
+        Usuario usr = NegocioFacade.getUsuario(cod);
         Operacao op = NegocioFacade.excluirCliente(usr);
         if( !op.getStatus() ){
             JOptionPane.showMessageDialog(this, "Não foi possível excluir o Cliente: \n"+op.getErro(), "ERRO", JOptionPane.ERROR_MESSAGE);

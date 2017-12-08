@@ -14,7 +14,8 @@ public interface DAOFacade {
 	public boolean modificarCliente(Usuario usr);
 	public boolean cadastrarCliente(Usuario usr);   
         public ArrayList<Usuario> getContas();
-        public Usuario getConta(String cod);
+        public Usuario getUsuario(String cod);
+        public Conta getConta(String cod);
 	public ArrayList<Sacar> getSaques();
 	public ArrayList<Depositar> getDepositos();
 	public ArrayList<Emprestimo> getEmprestimos();

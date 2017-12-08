@@ -69,10 +69,7 @@ public class DAOMemoria implements DAOFacade{
             return usuarios.add( usr );
 	}
         
-        @Override
-	public ArrayList< organizar(Usuario usr) {
-            
-	}
+       
 
     
         @Override
@@ -161,9 +158,17 @@ public class DAOMemoria implements DAOFacade{
         public ArrayList<Usuario> getContas() {
 		return usuarios;
 	}
-        public Usuario getConta(String cod){
+        public Usuario getUsuario(String cod){
             for(Usuario aux : usuarios){
                 if(aux.getCpf().compareTo(cod)==0){
+                    return aux;
+                }
+            }
+            return null;
+        }
+        public Conta getConta(String cod){
+            for(Conta aux : saldos){
+                if(aux.getUsuario().getCpf().compareTo(cod)==0){
                     return aux;
                 }
             }
