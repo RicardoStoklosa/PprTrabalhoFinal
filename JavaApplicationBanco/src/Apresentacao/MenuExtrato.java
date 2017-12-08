@@ -7,6 +7,7 @@ package Apresentacao;
 
 import EDA.*;
 import Negocio.NegocioFacade;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,9 +30,10 @@ public class MenuExtrato extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
         for( Sacar aux : saques ){
-            Object linha[] = { aux.getData(), "+ "+aux.getValorSaque()};
+            Object linha[] = { aux.getData(), "- "+aux.getValorSaque()};
             
-            modelo.addRow( linha );;
+            modelo.addRow( linha );
+            
         }
         for( Emprestimo aux : emprestimos ){
             Object linha[] = { aux.getData(), "+ "+aux.getValorEmprestimo()};
@@ -39,7 +41,7 @@ public class MenuExtrato extends javax.swing.JFrame {
             modelo.addRow( linha );
         }
         for( Depositar aux : depositos ){
-            Object linha[] = { aux.getData(), "- "+aux.getValorDeposito()};
+            Object linha[] = { aux.getData(), "+ "+aux.getValorDeposito()};
             
             modelo.addRow( linha );
         }
@@ -62,7 +64,9 @@ public class MenuExtrato extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -106,6 +110,7 @@ public class MenuExtrato extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

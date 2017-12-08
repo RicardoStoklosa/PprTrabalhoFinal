@@ -29,12 +29,12 @@ public class DAOMemoria implements DAOFacade{
         private void init(){
             
             gerente = new Administrador("udesc", "785b10a64d56af61e802913738e7d567");
-            Usuario usr1 = new Usuario("Ricardo", "10129245672", 1998,"joinville", "ricardo", "202cb962ac59075b964b07152d234b70",false);
-            Usuario usr2 = new Usuario("Ricasdfsfrdo", "10139245672", 1998,"joinville", "ric", "202cb962ac59075b964b07152d234b70",true);
+            Usuario usr1 = new Usuario("Ricardo", "12345678987", 1998,"joinville", "12345678987", "202cb962ac59075b964b07152d234b70",false);
+            Usuario usr2 = new Usuario("jorge", "98765432123", 1998,"joinville", "98765432123", "202cb962ac59075b964b07152d234b70",true);
             usuarios.add(usr1);
             usuarios.add(usr2);
-            saldos.add(new Conta(zero,usr1));
-            saldos.add(new Conta(new BigDecimal("4.00"),usr2));
+            saldos.add(new Conta(new BigDecimal("450.50"),usr1));
+            saldos.add(new Conta(new BigDecimal("500.00"),usr2));
         }
 
 

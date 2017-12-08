@@ -31,7 +31,6 @@ public class MenuAlterar extends javax.swing.JFrame {
         nome.setEnabled(false);
         endereco.setEnabled(false);
         nasc.setEnabled(false);
-        jCheckBox1.setEnabled(false);
         jToggleButton1.setText("Consultar");
         jDelete.setEnabled(false);
         modo_alteracao = false;
@@ -42,7 +41,6 @@ public class MenuAlterar extends javax.swing.JFrame {
         nome.setEnabled(true);
         endereco.setEnabled(true);
         nasc.setEnabled(true);
-        jCheckBox1.setEnabled(true);
         jToggleButton1.setText("Alterar");
         jDelete.setEnabled(true);
         modo_alteracao = true;
@@ -75,13 +73,9 @@ public class MenuAlterar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jDelete = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         jLabel1.setText("Nome:");
 
@@ -98,6 +92,7 @@ public class MenuAlterar extends javax.swing.JFrame {
             }
         });
 
+        jDelete.setBackground(new java.awt.Color(255, 0, 6));
         jDelete.setText("Deletar");
         jDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,62 +100,44 @@ public class MenuAlterar extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Juridico");
-
-        jMenu1.setText("File");
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(6, 6, 6))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nome)
+                            .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                             .addComponent(cpf)
                             .addComponent(nasc)
                             .addComponent(endereco)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jDelete)
-                        .addGap(76, 76, 76)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jToggleButton1)))
-                .addGap(9, 9, 9)
-                .addComponent(jCheckBox1)
-                .addContainerGap())
+                .addGap(103, 103, 103))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox1)))
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
@@ -173,18 +150,15 @@ public class MenuAlterar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jToggleButton1)
-                        .addContainerGap(20, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jToggleButton1)
+                    .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
@@ -209,7 +183,6 @@ public class MenuAlterar extends javax.swing.JFrame {
             nome.setText( usuario.getNome());
             nasc.setText( Integer.toString(usuario.getNasc()) );
             endereco.setText(usuario.getEndereco());
-            jCheckBox1.setSelected(usuario.getJuri());
             
             // altera o texto do botão de consultar para alterar
             ativarModoAlteracao();
@@ -219,7 +192,7 @@ public class MenuAlterar extends javax.swing.JFrame {
     private void alterarRegistro(){
         String cod = cpf.getText();
         Usuario usuario = NegocioFacade.getUsuario(cod);
-        Usuario usr = new Usuario(nome.getText(),cod,Integer.parseInt(nasc.getText()),endereco.getText(),cod,usuario.getSenha(),jCheckBox1.isSelected());
+        Usuario usr = new Usuario(nome.getText(),cod,Integer.parseInt(nasc.getText()),endereco.getText(),cod,usuario.getSenha(),usuario.getJuri());
         Operacao op = NegocioFacade.modificarCliente(usr);
         if( !op.getStatus() ){
             JOptionPane.showMessageDialog(this, "Não foi possível alterar o Cliente: \n"+op.getErro(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -236,12 +209,6 @@ public class MenuAlterar extends javax.swing.JFrame {
             }
         }
     }
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Main.tela = new Login();
-        Main.tela.setVisible( true );
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
         String cod = cpf.getText();
         Usuario usr = NegocioFacade.getUsuario(cod);
@@ -301,16 +268,11 @@ public class MenuAlterar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpf;
     private javax.swing.JTextField endereco;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JButton jDelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField nasc;
     private javax.swing.JTextField nome;
