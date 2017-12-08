@@ -13,11 +13,14 @@ public class Pessoa {
 
 	private String endereco;
         
-        public Pessoa( String n, String c, int data, String end){
+        private boolean juridico;
+        
+        public Pessoa( String n, String c, int data, String end,boolean jur){
             nome = n;
             cpf = c;
             anoNasc = data;
             endereco = end;
+            juridico = jur;
         }
         public String getNome(){
             return nome;
@@ -34,6 +37,10 @@ public class Pessoa {
         public String getEndereco(){
             return endereco;
            
+        }
+        
+        public boolean getJuri(){
+            return juridico;
         }
         
 

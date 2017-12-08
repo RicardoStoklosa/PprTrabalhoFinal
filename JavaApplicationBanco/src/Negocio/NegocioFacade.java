@@ -41,17 +41,31 @@ public class NegocioFacade {
             return status;
 	}
 
-	public static void saque(Double valor_saque, Usuario usuario) {
-
+	public static Operacao saque(BigDecimal valor_saque, Usuario usuario) {
+            Operacao status = new Operacao();
+            BigDecimal zero = new BigDecimal("0.00");
+            if(valor_saque.compareTo(zero)<=0){
+                status.anexarErro("Valor Invalido!");
+            }
+            if(!status.getStatus())
+                return status;
+            else{
+                Sacar saque = new Sacar(usuario,valor_saque);
+                boolean retorno = registros.saque(saque);
+                if(!retorno)
+                    status.anexarErro("Saldo Indisponivel!");
+            }
+            return status;
 	}
 
-	public static boolean solicitarEmprestimo(Double valor_emprestimo, Usuario usuario) {
-		return true;
-	}
+	public static Operacao emprestimo(Emprestimo emp) {
+		Operacao status = new Operacao();
+                boolean res = registros.emprestar(emp);
+                if(!res)
+                    status.anexarErro("Valor acima do limite");
+                return status;
+        }
 
-	public static void realizarEmprestimo(double valor_emprestimo, Usuario usuario) {
-
-	}
 
 	public static Operacao excluirCliente(Usuario usr) {
             Operacao status = new Operacao();
@@ -103,8 +117,13 @@ public class NegocioFacade {
 		return null;
 	}
 
-	public static ArrayList<Sacar> getSaques(Usuario cpf) {
-		return null;
+	public static ArrayList<Sacar> getSaques(Usuario usuario) {
+            ArrayList<Sacar> saques = new ArrayList();
+            for(Sacar aux : registros.getSaques()){
+                if(aux.getUsuario()==usuario)
+                    saques.add(aux);
+                }
+            return saques;
 	}
 
 	public static ArrayList<Depositar> getDepositos(Usuario usuario) {
@@ -117,8 +136,13 @@ public class NegocioFacade {
                 
 	}
 
-	public static ArrayList<Emprestimo> getEmprestimos(Usuario cpf) {
-		return null;
+	public static ArrayList<Emprestimo> getEmprestimos(Usuario usuario) {
+		ArrayList<Emprestimo> emp = new ArrayList();
+                for(Emprestimo aux : registros.getEmprestimos()){
+                    if(aux.getUsuario()==usuario)
+                        emp.add(aux);
+                }
+                return emp;
 	}
 
 }

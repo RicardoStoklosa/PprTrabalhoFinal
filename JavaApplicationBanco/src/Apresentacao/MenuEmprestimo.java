@@ -5,7 +5,9 @@
  */
 package Apresentacao;
 
+import EDA.Emprestimo;
 import EDA.Operacao;
+import EDA.Sacar;
 import Negocio.NegocioFacade;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,12 +17,12 @@ import javax.swing.JOptionPane;
  *
  * @author stokl
  */
-public class MenuDepositar extends javax.swing.JFrame {
+public class MenuEmprestimo extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuDepositar
+     * Creates new form MenuEmprestimo
      */
-    public MenuDepositar() {
+    public MenuEmprestimo() {
         initComponents();
     }
 
@@ -34,19 +36,17 @@ public class MenuDepositar extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jValor = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Depositar");
+        jButton1.setText("Solicitar Emprestimo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jValor.setToolTipText("");
 
         jButton2.setText("Teste");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -59,53 +59,52 @@ public class MenuDepositar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(jValor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(37, 37, 37)
-                .addComponent(jButton2)
-                .addGap(40, 40, 40))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(jButton1)
+                        .addGap(87, 87, 87))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(70, 70, 70))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jValor, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(184, 184, 184))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jButton2)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String val = jValor.getText();
+        String val = jTextField1.getText();
         BigDecimal money = new BigDecimal(val);
-        Operacao op = NegocioFacade.deposito(money, Main.user);
+        Emprestimo emp = new Emprestimo(Main.user , money);
+        Operacao op = NegocioFacade.emprestimo(emp);
         if(!op.getStatus()){
-            JOptionPane.showMessageDialog(this, "Não foi possível depositar: \n"+op.getErro(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Não foi possível realizar o emprestimo: \n"+op.getErro(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         else{
-            int opcao = JOptionPane.showConfirmDialog(this, "Depososito realizado com sucesso.\n"
-                                              + "Deseja fazer outro deposito?", "Operação OK", JOptionPane.YES_NO_OPTION);
-            if( opcao == JOptionPane.OK_OPTION ){
-                jValor.setText("");
-            }
-            else{
                 this.dispose();
-            }
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ArrayList<EDA.Depositar> depositos = new ArrayList();
-        depositos = NegocioFacade.getDepositos(Main.user);
-        for(EDA.Depositar aux: depositos){
-            System.out.println(aux.getValorDeposito());
+        ArrayList<Emprestimo> emp = new ArrayList();
+        emp = NegocioFacade.getEmprestimos(Main.user);
+        for(Emprestimo aux: emp){
+            System.out.println(aux.getValorEmprestimo());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -126,20 +125,20 @@ public class MenuDepositar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuDepositar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuDepositar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuDepositar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuDepositar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuDepositar().setVisible(true);
+                new MenuEmprestimo().setVisible(true);
             }
         });
     }
@@ -147,6 +146,6 @@ public class MenuDepositar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JTextField jValor;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

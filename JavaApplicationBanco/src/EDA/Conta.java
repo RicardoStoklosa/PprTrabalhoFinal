@@ -14,9 +14,13 @@ public class Conta{
         }
         
         public BigDecimal getSaldo(){
+            
             return saldo;
         }
         
+        public Usuario getUsuario(){
+            return usuario;
+        }
         
        
         

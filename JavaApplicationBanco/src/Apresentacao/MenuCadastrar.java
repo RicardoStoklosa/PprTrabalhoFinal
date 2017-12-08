@@ -52,6 +52,7 @@ public class MenuCadastrar extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         senha = new javax.swing.JPasswordField();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -75,6 +76,8 @@ public class MenuCadastrar extends javax.swing.JFrame {
                 jToggleButton1ActionPerformed(evt);
             }
         });
+
+        jCheckBox1.setText("Juridico");
 
         jMenu1.setText("File");
 
@@ -117,7 +120,9 @@ public class MenuCadastrar extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(202, 202, 202)
                         .addComponent(jToggleButton1)))
-                .addGap(96, 96, 96))
+                .addGap(9, 9, 9)
+                .addComponent(jCheckBox1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,10 +131,11 @@ public class MenuCadastrar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jCheckBox1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,7 +169,7 @@ public class MenuCadastrar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "O cpf não é um valor numérico", "ERRO", JOptionPane.ERROR_MESSAGE);
             return;
         }*/
-        Usuario usuario = new Usuario(name, cpf.getText(), nas, end,cpf.getText(),pass);
+        Usuario usuario = new Usuario(name, cpf.getText(), nas, end,cpf.getText(),pass,jCheckBox1.isSelected());
         Operacao op = NegocioFacade.cadastrarCliente(usuario);
         if( !op.getStatus() ){
             JOptionPane.showMessageDialog(this, "Não foi possível adicionar o cliente: \n"+op.getErro(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -224,6 +230,7 @@ public class MenuCadastrar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpf;
     private javax.swing.JTextField endereco;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

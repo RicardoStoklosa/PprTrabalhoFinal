@@ -31,6 +31,7 @@ public class MenuAlterar extends javax.swing.JFrame {
         nome.setEnabled(false);
         endereco.setEnabled(false);
         nasc.setEnabled(false);
+        jCheckBox1.setEnabled(false);
         jToggleButton1.setText("Consultar");
         jDelete.setEnabled(false);
         modo_alteracao = false;
@@ -41,6 +42,7 @@ public class MenuAlterar extends javax.swing.JFrame {
         nome.setEnabled(true);
         endereco.setEnabled(true);
         nasc.setEnabled(true);
+        jCheckBox1.setEnabled(true);
         jToggleButton1.setText("Alterar");
         jDelete.setEnabled(true);
         modo_alteracao = true;
@@ -73,6 +75,7 @@ public class MenuAlterar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jDelete = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -101,6 +104,8 @@ public class MenuAlterar extends javax.swing.JFrame {
                 jDeleteActionPerformed(evt);
             }
         });
+
+        jCheckBox1.setText("Juridico");
 
         jMenu1.setText("File");
 
@@ -143,15 +148,19 @@ public class MenuAlterar extends javax.swing.JFrame {
                         .addComponent(jDelete)
                         .addGap(76, 76, 76)
                         .addComponent(jToggleButton1)))
-                .addGap(96, 96, 96))
+                .addGap(9, 9, 9)
+                .addComponent(jCheckBox1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox1)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
@@ -168,7 +177,7 @@ public class MenuAlterar extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(jToggleButton1)
-                        .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,6 +209,7 @@ public class MenuAlterar extends javax.swing.JFrame {
             nome.setText( usuario.getNome());
             nasc.setText( Integer.toString(usuario.getNasc()) );
             endereco.setText(usuario.getEndereco());
+            jCheckBox1.setSelected(usuario.getJuri());
             
             // altera o texto do botão de consultar para alterar
             ativarModoAlteracao();
@@ -209,7 +219,7 @@ public class MenuAlterar extends javax.swing.JFrame {
     private void alterarRegistro(){
         String cod = cpf.getText();
         Usuario usuario = NegocioFacade.getConta(cod);
-        Usuario usr = new Usuario(nome.getText(),cod,Integer.parseInt(nasc.getText()),endereco.getText(),cod,usuario.getSenha());
+        Usuario usr = new Usuario(nome.getText(),cod,Integer.parseInt(nasc.getText()),endereco.getText(),cod,usuario.getSenha(),jCheckBox1.isSelected());
         Operacao op = NegocioFacade.modificarCliente(usr);
         if( !op.getStatus() ){
             JOptionPane.showMessageDialog(this, "Não foi possível alterar o Cliente: \n"+op.getErro(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -291,6 +301,7 @@ public class MenuAlterar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpf;
     private javax.swing.JTextField endereco;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JButton jDelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

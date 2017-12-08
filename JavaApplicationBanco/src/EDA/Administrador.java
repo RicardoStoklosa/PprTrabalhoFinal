@@ -3,7 +3,6 @@ package EDA;
 public class Administrador{
 	private String login;
 	private String senha;
-	private Gerenciar gerenciar;
         public Administrador(String l, String s) {
             this.login = l;
             this.senha = s;

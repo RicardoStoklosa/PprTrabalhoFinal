@@ -3,6 +3,7 @@ package DAO;
 
 import java.util.ArrayList;
 import EDA.*;
+import java.math.BigDecimal;
 
 public class DAOMemoria implements DAOFacade{
         private static DAOMemoria memoria;
@@ -10,11 +11,11 @@ public class DAOMemoria implements DAOFacade{
         private Administrador gerente;
         private Usuario usuario;
 	private ArrayList<Usuario> usuarios = new ArrayList();
-	private ArrayList<Administrador> gerentes = new ArrayList();
         private ArrayList<Sacar> saques = new ArrayList();
         private ArrayList<Depositar> depositos = new ArrayList();
 	private ArrayList<Emprestimo> emprestimos = new ArrayList();
-	
+        private ArrayList<Conta> saldos = new ArrayList();
+	BigDecimal zero=new BigDecimal("0.00");
 	public static DAOMemoria get(){
             if( memoria == null )
                 memoria = new DAOMemoria();
@@ -26,10 +27,14 @@ public class DAOMemoria implements DAOFacade{
 	}
         
         private void init(){
-            gerente = new Administrador("udesc", "785b10a64d56af61e802913738e7d567");
-            usuarios.add(new Usuario("Ricardo", "10129245672", 1998,"joinville", "ricardo", "202cb962ac59075b964b07152d234b70"));
-            usuarios.add(new Usuario("Ricasdfsfrdo", "10139245672", 1998,"joinville", "ric", "202cb962ac59075b964b07152d234b70"));
             
+            gerente = new Administrador("udesc", "785b10a64d56af61e802913738e7d567");
+            Usuario usr1 = new Usuario("Ricardo", "10129245672", 1998,"joinville", "ricardo", "202cb962ac59075b964b07152d234b70",false);
+            Usuario usr2 = new Usuario("Ricasdfsfrdo", "10139245672", 1998,"joinville", "ric", "202cb962ac59075b964b07152d234b70",true);
+            usuarios.add(usr1);
+            usuarios.add(usr2);
+            saldos.add(new Conta(zero,usr1));
+            saldos.add(new Conta(new BigDecimal("4.00"),usr2));
         }
 
 
@@ -60,19 +65,68 @@ public class DAOMemoria implements DAOFacade{
             if( us.getCpf()== usr.getCpf())
                 return false;
             }
+            saldos.add(new Conta(zero,usr));
             return usuarios.add( usr );
+	}
+        
+        @Override
+	public ArrayList< organizar(Usuario usr) {
+            
 	}
 
     
         @Override
 	public boolean deposito(Depositar depos) {
-                
+                for(Conta aux : saldos){
+                    if(aux.getUsuario()==depos.getUsuario()){
+                        BigDecimal soma = depos.getValorDeposito().add(aux.getSaldo());
+                        System.out.println(soma);
+                        saldos.add(new Conta(soma,depos.getUsuario()));
+                        saldos.remove(aux);
+
+                    }
+                }
                 return depositos.add(depos);
 	}
 
         @Override
-	public void saque(Double valor_saque, Usuario usuario) {
-
+	public boolean saque(Sacar saque) {
+            for(Conta aux : saldos){
+                if(aux.getUsuario()==saque.getUsuario()){
+                    BigDecimal sub = aux.getSaldo().subtract(saque.getValorSaque());
+                    System.out.println(sub);
+                    if(sub.compareTo(zero)==-1) 
+                        return false;
+                    saldos.add(new Conta(sub,saque.getUsuario()));
+                    saldos.remove(aux);
+                }
+            }
+            
+            return saques.add(saque);
+	}
+        
+        @Override
+        public boolean emprestar(Emprestimo emprestimo){
+            BigDecimal x=new BigDecimal("75000.00");
+            BigDecimal y=new BigDecimal("25000.00");
+            for(Conta aux : saldos){
+                if(aux.getUsuario()==emprestimo.getUsuario()){
+                    BigDecimal soma = aux.getSaldo().add(emprestimo.getValorEmprestimo());
+                    if(aux.getUsuario().getJuri() && x.compareTo(emprestimo.getValorEmprestimo())>=0){
+                        saldos.add(new Conta(soma,emprestimo.getUsuario()));
+                        saldos.remove(aux);
+                    }
+                    else if(y.compareTo(emprestimo.getValorEmprestimo())>=0){
+                        saldos.add(new Conta(soma,emprestimo.getUsuario()));
+                        saldos.remove(aux);
+                    }
+                    else
+                        return false;
+                    
+                }
+            }
+            
+            return emprestimos.add(emprestimo);
 	}
 
         @Override
@@ -87,11 +141,7 @@ public class DAOMemoria implements DAOFacade{
             return false;
 	}
 
-        @Override
-	public boolean verificaDispSaldo(float Valor, Usuario usr) {
-		return false;
-	}
-
+        
         @Override
 	public boolean excluirCliente(Usuario usr) {
             for(Usuario aux : usuarios){
@@ -103,15 +153,9 @@ public class DAOMemoria implements DAOFacade{
             return false;
 	}
         
-        @Override
-        public boolean solicitarEmprestimo(Double valor_emprestimo, Usuario usuario){
-            return true;
-        }
+        
 
-        @Override
-	public void realizarEmprestimo(double valor_emprestimo, Usuario usuario) {
-
-	}
+        
         
         @Override
         public ArrayList<Usuario> getContas() {
@@ -125,13 +169,10 @@ public class DAOMemoria implements DAOFacade{
             }
             return null;
         }
-        @Override
-	public ArrayList<Administrador> getGerente(Administrador login) {
-		return gerentes;
-	}
+        
 
         @Override
-	public ArrayList<Sacar> getSaques(Usuario cpf) {
+	public ArrayList<Sacar> getSaques() {
 		return saques;
 	}
 
@@ -141,7 +182,7 @@ public class DAOMemoria implements DAOFacade{
 	}
 
         @Override
-	public ArrayList<Emprestimo> getEmprestimos(Usuario cpf) {
+	public ArrayList<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
 

@@ -1,19 +1,32 @@
 package EDA;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Emprestimo {
 
-	private double saldo;
+	private BigDecimal emprestimo;
 
-	private Usuario usuario;
+	private LocalDate dataEmprestimo;
+        
+        private Usuario user;
 
-	public Boolean solicitarEmprestimo(LocalDate tempo, Double valor) {
-		return null;
+	public Emprestimo(Usuario usr, BigDecimal valor) {
+		emprestimo = valor;
+                dataEmprestimo = LocalDate.now();
+                user =usr;
 	}
-
-	public void realizarEmprestimo(Double valor) {
-
-	}
+        public BigDecimal getValorEmprestimo(){
+            return emprestimo;
+        }
+        
+        public LocalDate getData(){
+            return dataEmprestimo;
+        }
+        
+        public Usuario getUsuario(){
+            return user;
+        }
+	
 
 }
