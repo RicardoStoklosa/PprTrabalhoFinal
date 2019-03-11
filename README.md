@@ -1,7 +1,12 @@
 # TRABALHO FINAL PPR
 
-> Trabalho final da matéria de Projetos de Programa
+> Sistema simples de banco feito em java e swing
 
+# O que eu aprendi?
+
+ - UML
+ - DER
+ 
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTIwNzQyNzA1NzZdfQ==
 -->
